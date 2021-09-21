@@ -3,6 +3,7 @@ const clipboardy = require("clipboardy");
 const program = require("commander");
 
 const createPassword = require("./utils/createPassword");
+const savePassword = require("./utils/savePassword");
 
 program.version("1.0.0").description("Password Generator");
 
@@ -17,6 +18,11 @@ const { length, save, numbers, symbols } = program.opts();
 
 // Get generated password
 const generatedPassword = createPassword(length, numbers, symbols);
+
+// Save password to file
+if (save) {
+  savePassword(generatedPassword);
+}
 
 // Copy to clipboard
 clipboardy.writeSync(generatedPassword);
